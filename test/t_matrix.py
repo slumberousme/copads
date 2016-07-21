@@ -72,6 +72,18 @@ class testVector(unittest.TestCase):
         vectorA = m.Vector([0.1, 0.2, 0.3, 0.4])
         result = [math.tanh(x) for x in vectorA.values]
         self.assertEqual(vectorA.tanh(), result)
+    def testASinh(self):
+        vectorA = m.Vector([0.1, 0.2, 0.3, 0.4])
+        result = [math.asinh(x) for x in vectorA.values]
+        self.assertEqual(vectorA.asinh(), result)
+    def testACosh(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        result = [math.acosh(x) for x in vectorA.values]
+        self.assertEqual(vectorA.acosh(), result)
+    def testATanh(self):
+        vectorA = m.Vector([0.1, 0.2, 0.3, 0.4])
+        result = [math.atanh(x) for x in vectorA.values]
+        self.assertEqual(vectorA.atanh(), result)
     def testSqrt(self):
         vectorA = m.Vector([1, 2, 3, 4])
         result = [math.sqrt(x) for x in vectorA.values]
@@ -84,79 +96,187 @@ class testVector(unittest.TestCase):
         vectorA = m.Vector([1, 2, 3, 4])
         result = [float(x)**(1.0/3) for x in vectorA.values]
         self.assertEqual(vectorA.root(3), result)
+    def testAbs(self):
+        vectorA = m.Vector([1, -2, 3, 4])
+        result = [math.fabs(x) for x in vectorA.values]
+        self.assertEqual(vectorA.abs(), result)
+    def testFactorial(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        result = [math.factorial(x) for x in vectorA.values]
+        self.assertEqual(vectorA.factorial(), result)
+    def testDegrees(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        result = [math.degrees(x) for x in vectorA.values]
+        self.assertEqual(vectorA.degrees(), result)
+    def testRadians(self):
+        vectorA = m.Vector([10, 20, 30, 40])
+        result = [math.radians(x) for x in vectorA.values]
+        self.assertEqual(vectorA.radians(), result)
+    def testSum(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        self.assertEqual(vectorA.factorial(), math.fsum(vectorA.values))
+    def testSetitem(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        self.assertEqual(vectorA.values, [1, 2, 3, 4])
+        vectorA[1] = 10
+        self.assertEqual(vectorA.values, [1, 10, 3, 4])
+    def testGetItem(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        self.assertEqual(vectorA.values, [1, 2, 3, 4])
+        vectorA[1] = 10
+        self.assertEqual(vectorA[1], 10)
+        self.assertEqual(vectorA[10], None)
+    def testAdd(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        vectorB = m.Vector([1, 2, 3, 4])
+        result = [2, 4, 6, 8]
+        vectorC = vectorA + vectorB
+        self.assertEqual(vectorC.values, result)
+        vectorD = vectorA.add(vectorB)
+        self.assertEqual(vectorD.values, result)
+    def testNegate(self):
+        vectorA = m.Vector([1, -2, 3, -4])
+        result = [-1, 2, -3, -4]
+        vectorC = -vectorA
+        self.assertEqual(vectorC.values, result)
+        vectorD = vectorA.negate()
+        self.assertEqual(vectorD.values, result)
+    def testSubtract(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        vectorB = m.Vector([0, 1, 0, 2])
+        result = [1, 1, 3, 2]
+        vectorC = vectorA - vectorB
+        self.assertEqual(vectorC.values, result)
+        vectorD = vectorA.subtract(vectorB)
+        self.assertEqual(vectorD.values, result)
+    def testMultiply(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        vectorB = m.Vector([1, 2, 3, 4])
+        result = [1, 4, 9, 16]
+        vectorC = vectorA * vectorB
+        self.assertEqual(vectorC.values, result)
+        vectorD = vectorA.multiply(vectorB)
+        self.assertEqual(vectorD.values, result)
+    def testDivide(self):
+        vectorA = m.Vector([1, 2, 3, 4])
+        vectorB = m.Vector([1, 2, 3, 4])
+        result = [1, 1, 1, 1]
+        vectorC = vectorA / vectorB
+        self.assertEqual(vectorC.values, result)
+        vectorD = vectorA.divide(vectorB)
+        self.assertEqual(vectorD.values, result)
 
-# def Vector_test():
-
-    # print('a[0] = 1.0')
-    # a[0] = 1.0
-
-    # print('a[3] = 3.0')
-    # a[3] = 3.0
-
-    # print('a[0]=', a[0])
-    # print('a[1]=', a[1])
-
-    # print('len(a)=',len(a))
-    # print('a.size()=', a.size())
-            
-    # b = Vector([1, 2, 3, 4])
-    # print('a=', a)
-    # print('b=', b)
-
-    # print('a+b')
-    # c = a + b
-    # c.out()
-
-    # print('-a')
-    # c = -a
-    # c.out()
-    # a.out()
-
-    # print('a-b')
-    # c = a - b
-    # c.out()
-
-    # print('a*1.2')
-    # c = a*1.2
-    # c.out()
-
-    # print('1.2*a')
-    # c = 1.2*a
-    # c.out()
-    # print('a=', a)
-
-    # print('dot(a,b) = ', vDot(a,b))
-    # print('dot(b,a) = ', vDot(b,a))
-
-    # print('a*b')
-    # c = a*b
-    # c.out()
     
-    # print('a/1.2')
-    # c = a/1.2
-    # c.out()
-
-    # print('a[0:2]')
-    # c = a[0:2]
-    # c.out()
-
-    # print('a[2:5] = [9.0, 4.0, 5.0]')
-    # a[2:5] = [9.0, 4.0, 5.0]
-    # a.out()
-
-    # print('sqrt(a)=', vSqrt(a))
-    # print('pow(a, 2*ones(len(a)))=', vPow(a, 2*vOnes(len(a))))
-    # print('pow(a, 2)=',vPow(a, 2 * vOnes(len(a))))
-  
-
-    # print('del a')
-    # del a
-
-    # try:
-        # a = vRandom(11, 0., 2.)
-        # a.out()
-
-    # except: pass
+class testMatrix(unittest.TestCase):
+    def testInit1(self):
+        matrixA = m.Matrix(2)
+        result = {(0,0): 0, (0,1): 0,
+                  (1,0): 0, (1,1): 0}
+        self.assertEqual(matrixA.values, result)
+        self.assertEqual(matrixA.dimensions, [2, 2])
+    def testInit2(self):
+        matrixA = m.Matrix(2, 3)
+        result = {(0,0): 0, (0,1): 0, (0,2): 0,
+                  (1,0): 0, (1,1): 0, (1,2): 0}
+        self.assertEqual(matrixA.values, result)
+        self.assertEqual(matrixA.dimensions, [2, 3])
+    def testInit3(self):
+        matrixA = m.Matrix([[1, 2, 3], [4, 5, 6]])
+        result = {(0,0): 1, (0,1): 2, (0,2): 3,
+                  (1,0): 4, (1,1): 5, (1,2): 6}
+        self.assertEqual(matrixA.values, result)
+        self.assertEqual(matrixA.dimensions, [2, 3])
+    def testInit4(self):
+        data = {(0,0): 1, (0,2): 3,
+                (1,0): 4, (1,1): 5}
+        matrixA = m.Matrix(data)
+        self.assertEqual(matrixA.values, data)
+        self.assertEqual(matrixA.dimensions, [2, 3])
+    def testInit5(self):
+        data = {(9,9): 100}
+        matrixA = m.Matrix(data)
+        self.assertEqual(matrixA.values, data)
+        self.assertEqual(matrixA.dimensions, [10, 10])
+    def testIdentityMatrix(self):
+        matrixA = m.Matrix()
+        matrixA.createIdentityMatrix(3)
+        result = {(0,0): 1, (0,1): 0, (0,2): 0,
+                  (1,0): 0, (1,1): 1, (1,2): 0,
+                  (2,0): 0, (2,1): 0, (2,2): 1}
+        self.assertEqual(matrixA.values, result)
+    def testSetItem(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 0
+        matrixA[(1,1)] = 1
+        matrixA[(2,2)] = 4
+        matrixA[(3,3)] = 9
+        self.assertEqual(matrixA.dimensions, [0, 0])
+        matrixA.updateDimensions()
+        self.assertEqual(matrixA.dimensions, [4, 4])
+        result = {(0,0): 0, (1,1): 1,
+                  (2,2): 4, (3,3): 9}
+        self.assertEqual(matrixA.values, result)
+    def testGetItem(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 0
+        matrixA[(2,2)] = 4
+        self.assertEqual(matrixA[(0,0)], 0)
+        self.assertEqual(matrixA[(1,1)], None)
+        self.assertEqual(matrixA[(2,2)], 4)
+    def testRow(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 1
+        matrixA[(1,1)] = 2
+        matrixA.updateDimensions()
+        self.assertEqual(matrixA.row(0, None), [1, None])
+        self.assertEqual(matrixA.row(0, 0), [1, 0])
+        self.assertEqual(matrixA.row(1, None), [None, 2])
+        self.assertEqual(matrixA.row(1, 0), [0, 2])
+    def testColumn(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 1
+        matrixA[(1,1)] = 2
+        matrixA.updateDimensions()
+        self.assertEqual(matrixA.column(0, None), [1, None])
+        self.assertEqual(matrixA.column(0, 0), [1, 0])
+        self.assertEqual(matrixA.column(1, None), [None, 2])
+        self.assertEqual(matrixA.column(1, 0), [0, 2])
+    def testTrace(self):
+        matrixA = m.Matrix()
+        matrixA[(1,1)] = 1
+        matrixA[(2,2)] = 4
+        self.assertEqual(matrixA.trace(), 5)
+    def testTranspose(self):
+        matrixA = m.Matrix()
+        matrixA[(0,1)] = 1
+        matrixA[(2,3)] = 4
+        matrixB = matrixA.transpose()
+        result = {(1,0): 1, (3,2): 4}
+        self.assertEqual(matrixB.values, result)
+    def testAddScalar(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 0
+        matrixA[(1,1)] = 1
+        matrixA[(2,2)] = 4
+        matrixB = matrixA + 3
+        result = {(0,0): 3, (1,1): 4, (2,2): 7}
+        self.assertEqual(matrixB.values, result)
+        matrixC = matrixA.add(3)
+        self.assertEqual(matrixC.values, result)
+    def testAddMatrix(self):
+        matrixA = m.Matrix()
+        matrixA[(0,0)] = 0
+        matrixA[(1,1)] = 1
+        matrixA[(2,2)] = 4
+        matrixB = m.Matrix()
+        matrixB[(1,1)] = 1
+        matrixB[(3,3)] = 4
+        matrixC = matrixA + matrixB
+        result = {(0,0): 0, (1,1): 2, (2,2): 4, (3,3): 4}
+        self.assertEqual(matrixC.values, result)
+        matrixD = matrixA.add(matrixB)
+        self.assertEqual(matrixD.values, result)
+        
     
 # def SparseMatrix_test():
     # print('a = sparse()')
